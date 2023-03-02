@@ -1,0 +1,40 @@
+Programs to run:
+
+Togther:
+
+ABS_Call.py
+
+
+To observe each process seperately
+
+Run: the receiver sockets calling:
+1) CANBus_2Nov22.py
+2) ABS_process.py
+3) Hydraulic_modulator.py
+4) Gateway.py
+
+
+the sender sockets calling:
+4) ABS_clients.py
+
+
+
+press Brake_pedal GUI button to apply brake to activate ABS (default OFF).
+For optimization, press auto random button.
+Hydraulic_modulator will generate a GUI output for each value of the cycle to indicate ABS activation
+
+If oserror occurs, type "sudo pkill python" in terminal and run again
+
+
+Rafiul's flow in code-
+        WheelSpeed_sensor ->
+                              		 		  -> Hydraulic_modulator
+              Brake_pedal ->                    ->  ABS_process
+                             ADAS -> CANBus ->	         -> CANBus -> Gateway 
+
+
+
+ADAS -- Provide Vehicle speed
+CanBus -- Pass vehicle speed to ABS_process.py
+ABS_process -- Calculate slip rate and pressure change and send it to Hydraulic Modulator
+Hydraulic Modulator -- Receives updated pressure from ABS
